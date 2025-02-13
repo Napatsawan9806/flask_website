@@ -1,0 +1,20 @@
+[project]
+name = "flask-project"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Napatsawan Tosomnak",email = "6710110206@psu.ac.th"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flask (>=3.1.0,<4.0.0)",
+    "flask-wtf (>=1.2.2,<2.0.0)",
+    "flask-sqlalchemy (>=3.1.1,<4.0.0)",
+    "wtforms-sqlalchemy (>=0.4.2,<0.5.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
