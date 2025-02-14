@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Sign In </title>
+    <link rel="stylesheet" href="{{ url_for ('static', filename='css/sighin.css') }}">
+</head>
+
+<body>
+    <h1> Sign In </h1>
+    <form method="post" action="/sign_in">
+        <p>Enter username :</p>
+        <input type="text" name="username">
+        <p>Enter password : </p>
+        <input type="text" name="password">
+        <input type="submit" name="signin" value="Sign In">
+    </form>
+
+</body>
+
+</html>
