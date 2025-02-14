@@ -3,14 +3,18 @@ from flask import Flask, render_template, redirect, url_for, request
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
+    print(request.method)
+    if request.method == "POST":
+        if request.form.get("login") == "Login":
+            print("login")
+            return redirect(url_for("login"))
+        else:
+            return render_template("home.html")
+    else:
+        pass
     return render_template("home.html")
-
-
-@app.route("/success/<name>")
-def success(name):
-    return "Welcome %s" % name
 
 
 @app.route("/login", methods=["POST", "GET"])
