@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
     UserMixin,
@@ -48,16 +48,16 @@ def home():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    print(request.method)
-    if request.method == "POST":
-        if request.form.get("login") == "Login":
-            print("login")
+    form = forms.LoginForm()
+    if form.validate_on_submit():
+        user = models.User.query.filter_by(username=form.username.data).first()
+        if user and check_password_hash(user.password, form.password.data):
+            login_user(user)
+            flash("login success")
             return redirect(url_for("home"))
         else:
-            return render_template("login.html")
-    else:
-        pass
-    return render_template("login.html")
+            flash("login failed")
+    return render_template("login.html", form=form)
 
 
 @app.route("/sign_in", methods=["POST", "GET"])
