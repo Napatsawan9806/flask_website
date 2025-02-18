@@ -60,9 +60,24 @@ def login():
     return render_template("login.html", form=form)
 
 
-@app.route("/sign_in", methods=["POST", "GET"])
-def signin():
-    return render_template("signin.html")
+@app.route("/register", methods=["POST", "GET"])
+def register():
+    form = forms.RegisterForm()
+    if form.validate_on_submit():
+        existing_user = models.User.query.filter_by(username=form.username.data).first()
+        if existing_user:
+            flash("user already exists")
+            return redirect(url_for("register"))
+
+        hashed_password = generate_password_hash(form.password.data)
+        new_user = models.User(username=form.username.data, password=hashed_password)
+        models.db.session.add(new_user)
+        models.db.session.commit()
+
+        flash("Account created successful")
+        return redirect(url_for("login"))
+
+    return render_template("register.html", form=form)
 
 
 if __name__ == "__main__":
