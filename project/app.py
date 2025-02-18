@@ -1,9 +1,23 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import (
+    UserMixin,
+    LoginManager,
+    login_user,
+    login_required,
+    logout_user,
+    current_user,
+)
+from werkzeug.security import generate_password_hash, check_password_hash
+
+import models
+import forms
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecretkey"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+
+models.init_db(app)
 
 
 @app.route("/", methods=["POST", "GET"])
