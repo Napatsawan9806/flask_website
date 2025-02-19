@@ -69,6 +69,12 @@ def logout():
     return redirect(url_for("login"))
 
 
+@app.route("/dashboard")
+@login_required
+def dashboard():
+    return f"Welcome {current_user.username} to your dashboard!"
+
+
 @app.route("/", methods=["POST", "GET"])
 def home():
     print(request.method)
