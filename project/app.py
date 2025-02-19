@@ -36,9 +36,9 @@ def home():
         if request.form.get("login") == "Login":
             print("login")
             return redirect(url_for("login"))
-        elif request.form.get("signin") == "Sign in":
+        elif request.form.get("register") == "Register":
             print("sign in")
-            return redirect(url_for("signin"))
+            return redirect(url_for("register"))
         else:
             return render_template("home.html")
     else:
