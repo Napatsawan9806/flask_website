@@ -8,42 +8,23 @@ from flask_login import (
     logout_user,
     current_user,
 )
-from werkzeug.security import generate_password_hash, check_password_hash
-
-import models
-import forms
+from forms import RegisterForm, LoginForm
+from models import db, User, bcrypt
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecretkey"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 
-models.init_db(app)
+db.init_app(app)
+bcrypt.init_app(app)
 
 login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "Login"
+login_manager.login_view = "login"
 
 
 @login_manager.user_loader
 def load_user(user_id):
-    return models.User.query.get(int(user_id))
-
-
-@app.route("/", methods=["POST", "GET"])
-def home():
-    print(request.method)
-    if request.method == "POST":
-        if request.form.get("login") == "Login":
-            print("login")
-            return redirect(url_for("login"))
-        elif request.form.get("register") == "Register":
-            print("sign in")
-            return redirect(url_for("register"))
-        else:
-            return render_template("home.html")
-    else:
-        pass
-    return render_template("home.html")
+    return User.query.get(int(user_id))
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -78,6 +59,23 @@ def register():
         return redirect(url_for("login"))
 
     return render_template("register.html", form=form)
+
+
+@app.route("/", methods=["POST", "GET"])
+def home():
+    print(request.method)
+    if request.method == "POST":
+        if request.form.get("login") == "Login":
+            print("login")
+            return redirect(url_for("login"))
+        elif request.form.get("register") == "Register":
+            print("sign in")
+            return redirect(url_for("register"))
+        else:
+            return render_template("home.html")
+    else:
+        pass
+    return render_template("home.html")
 
 
 if __name__ == "__main__":
