@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrpyt import Bcrypt
 from flask_login import UserMixin
 
 db = SQLAlchemy()
+bcrypt = Bcrypt()
 
 
 class User(UserMixin, db.Model):
@@ -10,9 +12,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
 
+    def set_password(self, password):
+        self.password = bcrypt.generate_password_hash(password).decode("utf-8")
 
-def init_db(app):
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
-        db.session.commit()
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
