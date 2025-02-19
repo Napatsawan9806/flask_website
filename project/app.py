@@ -29,35 +29,34 @@ def load_user(user_id):
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    form = forms.LoginForm()
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+
+    form = LoginForm()
     if form.validate_on_submit():
-        user = models.User.query.filter_by(username=form.username.data).first()
-        if user and check_password_hash(user.password, form.password.data):
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.check_password(form.password.data):
             login_user(user)
-            flash("login success")
-            return redirect(url_for("home"))
+            flash("Login successful!", "success")
+            return redirect(url_for("dashboard"))
         else:
-            flash("login failed")
+            flash("Invalid username or password", "danger")
     return render_template("login.html", form=form)
 
 
 @app.route("/register", methods=["POST", "GET"])
 def register():
-    form = forms.RegisterForm()
+    if current_user.is_authenticated:
+        return redirect(url_for("dashboard"))
+
+    form = RegisterForm()
     if form.validate_on_submit():
-        existing_user = models.User.query.filter_by(username=form.username.data).first()
-        if existing_user:
-            flash("user already exists")
-            return redirect(url_for("register"))
-
-        hashed_password = generate_password_hash(form.password.data)
-        new_user = models.User(username=form.username.data, password=hashed_password)
-        models.db.session.add(new_user)
-        models.db.session.commit()
-
-        flash("Account created successful")
+        user = User(username=form.username.data)
+        user.set_password(form.password.data)  # แฮชรหัสผ่าน
+        db.session.add(user)
+        db.session.commit()
+        flash("Account created successfully! You can now log in.", "success")
         return redirect(url_for("login"))
-
     return render_template("register.html", form=form)
 
 
