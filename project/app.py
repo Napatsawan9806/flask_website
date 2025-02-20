@@ -75,6 +75,24 @@ def dashboard():
     return f"Welcome {current_user.username} to your dashboard!"
 
 
+@app.route("/dashboard/enroll")
+@login_required
+def enroll():
+    return render_template("enroll.html")
+
+
+@app.route("/dashboard/withdraw")
+@login_required
+def withdraw():
+    return render_template("withdraw.html")
+
+
+@app.route("/dashboard/schedule")
+@login_required
+def schedule():
+    return render_template("schedule.html")
+
+
 @app.route("/", methods=["POST", "GET"])
 def home():
     print(request.method)
