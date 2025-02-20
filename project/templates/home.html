@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Home{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for ('static', filename='css/home.css') }}">
-</head>
+{% block title %} Homepage {% endblock %}
 
-<body>
-    <form method="post" action="/">
-        <input type="submit" name="login" value="Login">
-        <input type="submit" name="register" value="Register">
-    </form>
-    <h1>This is my homepage</h1>
-    <p> description </p>
-</body>
-
-</html>
+{% block content %}
+<h2>Welcome To PSU Enroll System</h2>
+<p><a href="{{ url_for('login') }}">Login</a></p>
+<p><a href="{{ url_for('register') }}">Register</a></p>
+{% endblock %}
