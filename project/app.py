@@ -53,7 +53,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         user = User(username=form.username.data)
-        user.set_password(form.password.data)  # แฮชรหัสผ่าน
+        user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash("Account created successfully! You can now log in.", "success")
@@ -65,7 +65,7 @@ def register():
 @login_required
 def logout():
     logout_user()
-    flash("You have been logout")
+    flash("You have been logout", "info")
     return redirect(url_for("login"))
 
 
