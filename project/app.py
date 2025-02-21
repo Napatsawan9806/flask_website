@@ -99,7 +99,7 @@ def enroll():
         else:
             flash("คุณได้ลงทะเบียนวิชานี้แล้ว!", "warning")
         return redirect(url_for("schedule"))
-    return render_template("register_course.html", courses=courses)
+    return render_template("enroll.html", courses=courses)
 
 
 @app.route("/dashboard/withdraw")
