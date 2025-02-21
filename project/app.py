@@ -72,7 +72,7 @@ def logout():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return f"Welcome {current_user.username} to your dashboard!"
+    return render_template("dashboard.html")
 
 
 @app.route("/dashboard/enroll")
