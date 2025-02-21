@@ -7,10 +7,11 @@ from flask_login import (
     login_required,
     logout_user,
     current_user,
-    admin_required,
 )
 from forms import RegisterForm, LoginForm
 from models import db, User, bcrypt, Course, Enrollment
+from decorators import admin_required
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecretkey"
