@@ -9,7 +9,7 @@ from flask_login import (
     current_user,
 )
 from forms import RegisterForm, LoginForm
-from models import db, User, bcrypt
+from models import db, User, bcrypt, Course, Enrollment
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecretkey"
@@ -75,10 +75,24 @@ def dashboard():
     return render_template("dashboard.html")
 
 
-@app.route("/dashboard/enroll")
+@app.route("/dashboard/enroll", methods=["GET", "POST"])
 @login_required
 def enroll():
-    return render_template("enroll.html")
+    courses = Course.query.all()  # ดึงรายชื่อวิชาทั้งหมดจากฐานข้อมูล
+    if request.method == "POST":
+        course_id = request.form.get("course")
+        existing_enrollment = Enrollment.query.filter_by(
+            user_id=current_user.id, course_id=course_id
+        ).first()
+        if not existing_enrollment:
+            new_enrollment = Enrollment(user_id=current_user.id, course_id=course_id)
+            db.session.add(new_enrollment)
+            db.session.commit()
+            flash("ลงทะเบียนวิชาเรียบร้อย!", "success")
+        else:
+            flash("คุณได้ลงทะเบียนวิชานี้แล้ว!", "warning")
+        return redirect(url_for("schedule"))
+    return render_template("register_course.html", courses=courses)
 
 
 @app.route("/dashboard/withdraw")
@@ -90,7 +104,8 @@ def withdraw():
 @app.route("/dashboard/schedule")
 @login_required
 def schedule():
-    return render_template("schedule.html")
+    enrollments = Enrollment.query.filter_by(user_id=current_user.id).all()
+    return render_template("schedule.html", enrollments=enrollments)
 
 
 @app.route("/", methods=["POST", "GET"])
