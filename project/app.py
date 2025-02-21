@@ -7,6 +7,7 @@ from flask_login import (
     login_required,
     logout_user,
     current_user,
+    admin_required,
 )
 from forms import RegisterForm, LoginForm
 from models import db, User, bcrypt, Course, Enrollment
@@ -106,6 +107,47 @@ def withdraw():
 def schedule():
     enrollments = Enrollment.query.filter_by(user_id=current_user.id).all()
     return render_template("schedule.html", enrollments=enrollments)
+
+
+@app.route("/admin/courses", methods=["GET", "POST"])
+@login_required
+@admin_required
+def manage_courses():
+    courses = Course.query.all()
+    if request.method == "POST":
+        course_name = request.form["name"]
+        course_schedule = request.form["schedule"]
+        new_course = Course(name=course_name, schedule=course_schedule)
+        db.session.add(new_course)
+        db.session.commit()
+        flash("เพิ่มวิชาเรียบร้อย!", "success")
+        return redirect(url_for("manage_courses"))
+    return render_template("admin_courses.html", courses=courses)
+
+
+@app.route("/admin/courses/delete/<int:course_id>", methods=["POST"])
+@login_required
+@admin_required
+def delete_course(course_id):
+    course = Course.query.get_or_404(course_id)
+    db.session.delete(course)
+    db.session.commit()
+    flash("ลบวิชาเรียบร้อย!", "success")
+    return redirect(url_for("manage_courses"))
+
+
+@app.route("/admin/courses/edit/<int:course_id>", methods=["GET", "POST"])
+@login_required
+@admin_required
+def edit_course(course_id):
+    course = Course.query.get_or_404(course_id)
+    if request.method == "POST":
+        course.name = request.form["name"]
+        course.schedule = request.form["schedule"]
+        db.session.commit()
+        flash("แก้ไขวิชาเรียบร้อย!", "success")
+        return redirect(url_for("manage_courses"))
+    return render_template("edit_course.html", course=course)
 
 
 @app.route("/", methods=["POST", "GET"])
