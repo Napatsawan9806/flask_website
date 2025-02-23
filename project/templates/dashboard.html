@@ -3,23 +3,28 @@
 {% block title %} Dashboard {% endblock %}
 
 {% block content %}
-<h2>Welcome to Your Dashboard</h2>
-<p>Hello, {{ current_user.username }}!</p>
+<div class="dashboard-container">
+    <h2>Welcome to Your Dashboard</h2>
+    <p class="welcome-text">Hello, <strong>{{ current_user.username }}</strong>!</p>
 
-<h3>Manage Courses</h3>
-<ul>
-    <li><a href="{{ url_for('enroll') }}">Enroll</a></li>
-    <li><a href="{{ url_for('schedule') }}">View Schedule</a></li>
-    <li><a href="{{ url_for('withdraw') }}">Withdraw</a></li>
-</ul>
+    <div class="dashboard-section">
+        <h3>Manage Courses</h3>
+        <ul class="dashboard-menu">
+            <li><a href="{{ url_for('enroll') }}" class="btn-dashboard">Enroll</a></li>
+            <li><a href="{{ url_for('schedule') }}" class="btn-dashboard">View Schedule</a></li>
+            <li><a href="{{ url_for('withdraw') }}" class="btn-dashboard">Withdraw</a></li>
+        </ul>
+    </div>
 
-{% if current_user.is_admin %}
-<h3>Admin Panel</h3>
-<ul>
-    <li><a href="{{ url_for('manage_courses') }}">Manage Course</a></li>
-</ul>
-{% endif %}
+    {% if current_user.is_admin %}
+    <div class="dashboard-section">
+        <h3>Admin Panel</h3>
+        <ul class="dashboard-menu">
+            <li><a href="{{ url_for('manage_courses') }}" class="btn-dashboard btn-admin">Manage Courses</a></li>
+        </ul>
+    </div>
+    {% endif %}
 
-
-<p><a href="{{ url_for('logout') }}">Logout</a></p>
+    <p><a href="{{ url_for('logout') }}" class="btn-logout">Logout</a></p>
+</div>
 {% endblock %}

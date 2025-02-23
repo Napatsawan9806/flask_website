@@ -145,3 +145,81 @@ button:hover {
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+/* สไตล์สำหรับ Dashboard */
+.dashboard-container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.dashboard-container h2 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.welcome-text {
+    font-size: 18px;
+    color: #333;
+}
+
+.dashboard-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.dashboard-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dashboard-menu li {
+    margin: 10px 0;
+}
+
+.btn-dashboard {
+    display: inline-block;
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-dashboard:hover {
+    background: #0056b3;
+}
+
+.btn-admin {
+    background: #28a745;
+}
+
+.btn-admin:hover {
+    background: #218838;
+}
+
+.btn-logout {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #dc3545;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background: #c82333;
+}
