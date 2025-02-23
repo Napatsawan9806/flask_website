@@ -1,43 +1,86 @@
-body {
-    background-color: rgb(229, 253, 252);
-    font-family: Arial, sans-serif;
+/* รีเซ็ตค่าเริ่มต้นของ CSS */
+* {
     margin: 0;
     padding: 0;
-    text-align: center;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
+body {
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* สไตล์ Navbar */
 nav {
-    background: #333;
-    padding: 10px;
+    background-color: #007bff;
+    padding: 15px 20px;
+    text-align: center;
 }
 
 nav a {
     color: white;
     text-decoration: none;
+    font-size: 18px;
     margin: 0 15px;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
+nav a:hover {
+    color: #ffeb3b;
+}
+
+/* คอนเทนเนอร์หลัก */
 .container {
+    width: 80%;
     margin: 20px auto;
-    width: 50%;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
+/* Flash Messages */
 .flash-messages {
-    color: white;
-    padding: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
     border-radius: 5px;
-    margin: 10px auto;
-    width: 40%;
+    font-weight: bold;
+    text-align: center;
 }
 
 .flash-success {
-    background: green;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.flash-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
 }
 
 .flash-danger {
-    background: red;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 
-.flash-info {
-    background: blue;
+/* ปุ่มหลัก */
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
 }
