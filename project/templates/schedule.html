@@ -3,22 +3,30 @@
 {% block title %} Schedule {% endblock %}
 
 {% block content %}
-<h2>Schedule</h2>
-{% if enrollments %}
-<table border="1">
-    <tr>
-        <th>Courses</th>
-        <th>Time</th>
-    </tr>
-    {% for enrollment in enrollments %}
-    <tr>
-        <td>{{ enrollment.course.name }}</td>
-        <td>{{ enrollment.course.schedule }}</td>
-    </tr>
-    {% endfor %}
-</table>
-{% else %}
-<p>You don't have any enrolled course yet.</p>
-{% endif %}
-<p><a href="{{ url_for('dashboard') }}">Bact To Dashboard</a></p>
+<div class="schedule-container">
+    <h2>Schedule</h2>
+
+    {% if enrollments %}
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in enrollments %}
+            <tr>
+                <td>{{ enrollment.course.name }}</td>
+                <td>{{ enrollment.course.schedule }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="no-courses">You don't have any enrolled courses yet.</p>
+    {% endif %}
+
+    <p><a href="{{ url_for('dashboard') }}" class="btn-back">Back To Dashboard</a></p>
+</div>
 {% endblock %}

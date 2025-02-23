@@ -223,3 +223,70 @@ button:hover {
 .btn-logout:hover {
     background: #c82333;
 }
+
+/* สไตล์สำหรับ Schedule Page */
+.schedule-container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.schedule-container h2 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* สไตล์สำหรับตาราง */
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.schedule-table th,
+.schedule-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.schedule-table th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+}
+
+.schedule-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.schedule-table tr:hover {
+    background-color: #d9edf7;
+}
+
+/* ข้อความเมื่อไม่มีรายวิชา */
+.no-courses {
+    color: red;
+    font-weight: bold;
+}
+
+/* ปุ่มกลับไป Dashboard */
+.btn-back {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #0056b3;
+}

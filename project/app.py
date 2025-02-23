@@ -95,9 +95,9 @@ def enroll():
             new_enrollment = Enrollment(user_id=current_user.id, course_id=course_id)
             db.session.add(new_enrollment)
             db.session.commit()
-            flash("ลงทะเบียนวิชาเรียบร้อย!", "success")
+            flash("Enroll success!", "success")
         else:
-            flash("คุณได้ลงทะเบียนวิชานี้แล้ว!", "warning")
+            flash("You have enroll this course before!", "warning")
         return redirect(url_for("schedule"))
     return render_template("enroll.html", courses=courses)
 
@@ -120,9 +120,9 @@ def withdraw():
         if enrollment:
             db.session.delete(enrollment)
             db.session.commit()
-            flash("ถอนรายวิชาเรียบร้อย!", "success")
+            flash("Withdraw success!", "success")
         else:
-            flash("ไม่พบรายวิชาที่คุณลงทะเบียนไว้!", "danger")
+            flash("You havn't enroll this coures!", "danger")
 
         return redirect(url_for("withdraw"))
 
