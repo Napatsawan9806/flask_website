@@ -290,3 +290,137 @@ button:hover {
 .btn-back:hover {
     background: #0056b3;
 }
+
+/* สไตล์สำหรับ Manage Course Page */
+.manage-container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.manage-container h2,
+.manage-container h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* ฟอร์มเพิ่มรายวิชา */
+.course-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.course-form label {
+    font-weight: bold;
+}
+
+.course-form input {
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-add {
+    padding: 10px 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-add:hover {
+    background: #218838;
+}
+
+/* ตารางรายวิชา */
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.course-table th,
+.course-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.course-table th {
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+}
+
+.course-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.course-table tr:hover {
+    background-color: #d9edf7;
+}
+
+/* ปุ่มในตาราง */
+.btn-edit,
+.btn-delete {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.btn-edit {
+    background: #ffc107;
+    color: black;
+}
+
+.btn-edit:hover {
+    background: #e0a800;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+/* ข้อความเมื่อไม่มีรายวิชา */
+.no-courses {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* ปุ่มกลับไป Dashboard */
+.btn-back {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #0056b3;
+}
