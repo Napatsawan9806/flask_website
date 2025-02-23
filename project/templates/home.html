@@ -3,5 +3,14 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<h2>Welcome To PSU Student System</h2>
+<div class="homepage-container">
+    <h1>Welcome To <span class="highlight">PSU Student System</span></h1>
+    <p class="subtitle">A Simple and Efficient System for Student Course Management</p>
+
+    <!-- ปุ่มไปยังหน้าหลัก -->
+    <div class="btn-container">
+        <a href="{{ url_for('register') }}" class="btn-main">Register</a>
+        <a href="{{ url_for('login') }}" class="btn-secondary">Login</a>
+    </div>
+</div>
 {% endblock %}
