@@ -102,10 +102,31 @@ def enroll():
     return render_template("enroll.html", courses=courses)
 
 
-@app.route("/dashboard/withdraw")
+@app.route("/dashboard/withdraw", methods=["GET", "POST"])
 @login_required
 def withdraw():
-    return render_template("withdraw.html")
+    courses = (
+        Course.query.join(Enrollment)
+        .filter(Enrollment.user_id == current_user.id)
+        .all()
+    )  # ดึงเฉพาะวิชาที่ลงทะเบียนอยู่
+
+    if request.method == "POST":
+        course_id = request.form.get("course")
+        enrollment = Enrollment.query.filter_by(
+            user_id=current_user.id, course_id=course_id
+        ).first()
+
+        if enrollment:
+            db.session.delete(enrollment)
+            db.session.commit()
+            flash("ถอนรายวิชาเรียบร้อย!", "success")
+        else:
+            flash("ไม่พบรายวิชาที่คุณลงทะเบียนไว้!", "danger")
+
+        return redirect(url_for("withdraw"))
+
+    return render_template("withdraw.html", courses=courses)
 
 
 @app.route("/dashboard/schedule")

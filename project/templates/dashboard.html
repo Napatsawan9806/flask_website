@@ -12,10 +12,11 @@
     <li><a href="{{ url_for('schedule') }}">View Schedule</a></li>
     <li><a href="{{ url_for('withdraw') }}">Withdraw</a></li>
 </ul>
+
 {% if current_user.is_admin %}
 <h3>Admin Panel</h3>
 <ul>
-    <li><a href="{{ url_for('manage_courses') }}">จัดการวิชา</a></li>
+    <li><a href="{{ url_for('manage_courses') }}">Manage Course</a></li>
 </ul>
 {% endif %}
 
