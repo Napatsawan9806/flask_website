@@ -12,11 +12,16 @@ from flask_login import (
 from forms import RegisterForm, LoginForm
 from models import db, User, bcrypt, Course, Enrollment
 from decorators import admin_required
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))  # ระบุตำแหน่งของไฟล์ app.py
+db_path = os.path.join(basedir, "instance", "database.db")  # ใช้ฐานข้อมูลที่อยู่ใน proj
 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecretkey"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 bcrypt.init_app(app)
